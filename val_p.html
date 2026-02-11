@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Be My Valentine ❤️</title>
+<style>
+body {
+text-align: center;
+font-family: Arial, sans-serif;
+margin-top: 100px;
+background-color: #ffe6f0;
+}
+h1 {
+color: #d63384;
+}
+button {
+padding: 10px 20px;
+font-size: 16px;
+margin: 20px;
+cursor: pointer;
+border-radius: 10px;
+border: none;
+}
+#yesBtn {
+background-color: #ff4d6d;
+color: white;
+}
+#noBtn {
+background-color: #6c757d;
+color: white;
+position: absolute;
+}
+#message {
+margin-top: 30px;
+font-size: 20px;
+color: #b30059;
+display: none;
+}
+</style>
+</head>
+<body>
+
+<h1>Will You Be My Valentine? ❤️</h1>
+
+<button id="yesBtn" onclick="showMessage()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveButton()">No 😜</button>
+
+<div id="message">
+From the moment we started talking, my days became brighter and my nights became magical.
+You make my heart smile in ways I never knew were possible.
+I promise to cherish you, support you, and make you laugh every single day.
+Thank you for being you. 💕
+Happy Valentine’s Day, my love ❤️
+</div>
+
+<script>
+function showMessage() {
+document.getElementById("message").style.display = "block";
+}
+
+function moveButton() {
+const button = document.getElementById("noBtn");
+const x = Math.random() * window.innerWidth;
+const y = Math.random() * window.innerHeight;
+button.style.left = x + "px";
+button.style.top = y + "px";
+}
+</script>
+
+</body>
+</html>
+
