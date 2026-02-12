@@ -6,55 +6,78 @@
 body {
 text-align: center;
 font-family: Arial, sans-serif;
+background: linear-gradient(to right, #ff9a9e, #fad0c4);
 margin-top: 100px;
-background-color: #ffe6f0;
+overflow: hidden;
 }
+
 h1 {
-color: #d63384;
+color: white;
 }
+
 button {
-padding: 10px 20px;
-font-size: 16px;
+padding: 12px 25px;
+font-size: 18px;
 margin: 20px;
 cursor: pointer;
-border-radius: 10px;
+border-radius: 12px;
 border: none;
 }
+
 #yesBtn {
 background-color: #ff4d6d;
 color: white;
 }
+
 #noBtn {
-background-color: #6c757d;
+background-color: #555;
 color: white;
 position: absolute;
 }
-#message {
-margin-top: 30px;
-font-size: 20px;
-color: #b30059;
+
+#proposal {
 display: none;
+margin-top: 40px;
+font-size: 22px;
+color: white;
+animation: fadeIn 2s ease-in-out;
+}
+
+.emoji-scene {
+font-size: 60px;
+margin: 20px 0;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
 }
 </style>
 </head>
 <body>
 
-<h1>Will You Be My Valentine? ❤️</h1>
+<h1 id="question">Will You Be My Valentine? ❤️</h1>
 
-<button id="yesBtn" onclick="showMessage()">Yes 💖</button>
+<button id="yesBtn" onclick="showProposal()">Yes 💖</button>
 <button id="noBtn" onmouseover="moveButton()">No 😜</button>
 
-<div id="message">
-From the moment we started talking, my days became brighter and my nights became magical.
-You make my heart smile in ways I never knew were possible.
-I promise to cherish you, support you, and make you laugh every single day.
-Thank you for being you. 💕
-Happy Valentine’s Day, my love ❤️
+<div id="proposal">
+<div class="emoji-scene">
+👦💐 ➡️ 👧 💍❤️
+</div>
+From the moment you came into my life, everything feels brighter and more beautiful.
+You make my heart race and my world complete.
+Today, I don’t just ask you to be my Valentine…
+I promise to always care, respect, and love you with all my heart.
+Will you hold my hand forever? 💕
 </div>
 
 <script>
-function showMessage() {
-document.getElementById("message").style.display = "block";
+function showProposal() {
+document.getElementById("yesBtn").style.display = "none";
+document.getElementById("noBtn").style.display = "none";
+document.getElementById("question").style.display = "none";
+document.getElementById("proposal").style.display = "block";
 }
 
 function moveButton() {
@@ -68,4 +91,3 @@ button.style.top = y + "px";
 
 </body>
 </html>
-
