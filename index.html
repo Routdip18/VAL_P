@@ -29,13 +29,82 @@ margin:20px;
 #yesBtn{ background:#ff2e63; color:white; }
 #noBtn{ background:#222; color:white; position:absolute; }
 
+/* Animation Container */
 #animationContainer{
 display:none;
-width:450px;
-margin:0 auto;
-margin-top:30px;
+position:relative;
+width:200px;
+height:200px;
+margin:50px auto;
 }
 
+/* Heart Shape */
+.heart-shape{
+width:100px;
+height:100px;
+background:red;
+position:absolute;
+top:50px;
+left:50px;
+transform:rotate(-45deg);
+animation:pulse 1s infinite;
+}
+
+.heart-shape:before,
+.heart-shape:after{
+content:"";
+width:100px;
+height:100px;
+background:red;
+border-radius:50%;
+position:absolute;
+}
+
+.heart-shape:before{
+top:-50px;
+left:0;
+}
+
+.heart-shape:after{
+left:50px;
+top:0;
+}
+
+/* Arrow */
+.arrow{
+width:140px;
+height:6px;
+background:brown;
+position:absolute;
+top:100px;
+left:-150px;
+animation:shoot 1.5s forwards;
+}
+
+.arrow:after{
+content:"";
+position:absolute;
+right:-10px;
+top:-7px;
+border-left:15px solid brown;
+border-top:10px solid transparent;
+border-bottom:10px solid transparent;
+}
+
+/* Animations */
+@keyframes shoot{
+to{
+left:30px;
+}
+}
+
+@keyframes pulse{
+0%{ transform:rotate(-45deg) scale(1); }
+50%{ transform:rotate(-45deg) scale(1.1); }
+100%{ transform:rotate(-45deg) scale(1); }
+}
+
+/* Message */
 #message{
 display:none;
 font-size:22px;
@@ -50,6 +119,7 @@ from{opacity:0;}
 to{opacity:1;}
 }
 
+/* Floating Hearts */
 .heart{
 position:absolute;
 color:red;
@@ -63,9 +133,6 @@ to{ transform:translateY(-600px); opacity:0; }
 }
 </style>
 
-<!-- Lottie Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
-
 </head>
 <body>
 
@@ -74,7 +141,10 @@ to{ transform:translateY(-600px); opacity:0; }
 <button id="yesBtn" onclick="start()">Yes 💖</button>
 <button id="noBtn" onmouseover="moveBtn()">No 😜</button>
 
-<div id="animationContainer"></div>
+<div id="animationContainer">
+<div class="heart-shape"></div>
+<div class="arrow"></div>
+</div>
 
 <div id="message">
 From the moment we started talking, my days became brighter and my nights became magical.
@@ -99,19 +169,10 @@ document.getElementById("noBtn").style.display="none";
 document.getElementById("question").style.display="none";
 document.getElementById("animationContainer").style.display="block";
 
-// Boy giving flowers animation
-lottie.loadAnimation({
-container: document.getElementById('animationContainer'),
-renderer: 'svg',
-loop: false,
-autoplay: true,
-path: 'https://assets2.lottiefiles.com/packages/lf20_wkebwzpz.json'
-});
-
 setTimeout(function(){
 document.getElementById("message").style.display="block";
 createHearts();
-},5000);
+},2000);
 }
 
 function moveBtn(){
