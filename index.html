@@ -7,16 +7,18 @@
 body{
     margin:0;
     overflow:hidden;
-    background:linear-gradient(to top,#ff758c,#ff7eb3);
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     text-align:center;
+    background:linear-gradient(to top,#ff758c,#ff7eb3);
     color:white;
 }
 
-h1{ margin-top:60px; }
+h1{
+    margin-top:80px;
+}
 
 button{
-    padding:12px 25px;
+    padding:12px 30px;
     font-size:18px;
     border:none;
     border-radius:10px;
@@ -25,62 +27,29 @@ button{
 }
 
 #yesBtn{ background:#ff2e63; color:white; }
-#noBtn{ background:#333; color:white; position:absolute; }
+#noBtn{ background:#222; color:white; position:absolute; }
 
-#scene{ display:none; height:400px; }
-
-svg{ width:600px; height:350px; }
-
-/* WALK */
-@keyframes walk{
-    from{ transform:translateX(-250px); }
-    to{ transform:translateX(0); }
+#animationContainer{
+    display:none;
+    width:500px;
+    margin:0 auto;
+    margin-top:30px;
 }
 
-.walk{
-    animation:walk 3s forwards;
-}
-
-/* KNEEL */
-.kneel #body{
-    transform:rotate(15deg);
-    transform-origin:top center;
-    transition:0.6s ease;
-}
-
-.kneel #leg1{
-    transform:rotate(70deg);
-    transform-origin:top left;
-    transition:0.6s ease;
-}
-
-.kneel #leg2{
-    transform:translateY(20px);
-    transition:0.6s ease;
-}
-
-.kneel #arm{
-    transform:rotate(-30deg);
-    transform-origin:left center;
-    transition:0.6s ease;
-}
-
-/* Ring */
-#ring{
-    opacity:0;
-    transition:1s ease;
-}
-
-/* Message */
 #message{
     display:none;
     font-size:22px;
     width:70%;
     margin:auto;
     margin-top:20px;
+    animation:fadeIn 2s forwards;
 }
 
-/* Hearts */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
 .heart{
     position:absolute;
     color:red;
@@ -93,61 +62,45 @@ svg{ width:600px; height:350px; }
     to{ transform:translateY(-600px); opacity:0; }
 }
 </style>
-</head>
 
+<!-- Lottie Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+</head>
 <body>
 
 <h1 id="question">Will You Be My Valentine? ❤️</h1>
+
 <button id="yesBtn" onclick="start()">Yes 💖</button>
 <button id="noBtn" onmouseover="moveBtn()">No 😜</button>
 
-<div id="scene">
-<svg viewBox="0 0 600 350">
+<div id="animationContainer"></div>
 
-<!-- Girl -->
-<circle cx="450" cy="170" r="25" fill="#f4c2c2"/>
-<rect x="435" y="195" width="30" height="90" fill="#ff69b4"/>
-
-<!-- Boy -->
-<g id="boy">
-    <circle cx="200" cy="170" r="25" fill="#f4c2c2"/>
-    <rect id="body" x="185" y="195" width="30" height="80" fill="#4a90e2"/>
-    <rect id="leg1" x="185" y="275" width="12" height="50" fill="#2c3e50"/>
-    <rect id="leg2" x="203" y="275" width="12" height="50" fill="#2c3e50"/>
-    <rect id="arm" x="215" y="210" width="40" height="10" fill="#f4c2c2"/>
-</g>
-
-<!-- Ring -->
-<circle id="ring" cx="300" cy="230" r="8" fill="gold"/>
-
-</svg>
+<div id="message">
+From the moment we started talking, my days became brighter and my nights became magical. 
+You make my heart smile in ways I never knew were possible. 
+I promise to cherish you, support you, and make you laugh every single day. 
+Thank you for being you. 💕 Happy Valentine’s Day, my love ❤️
 </div>
-
-<div id="message"></div>
 
 <script>
 function start(){
-
     document.getElementById("yesBtn").style.display="none";
     document.getElementById("noBtn").style.display="none";
     document.getElementById("question").style.display="none";
-    document.getElementById("scene").style.display="block";
+    document.getElementById("animationContainer").style.display="block";
 
-    let boy=document.getElementById("boy");
+    // Load Romantic Proposal Animation
+    lottie.loadAnimation({
+        container: document.getElementById('animationContainer'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'https://assets9.lottiefiles.com/packages/lf20_jcikwtux.json'
+    });
 
-    // Walk
-    boy.classList.add("walk");
-
-    // Kneel after walk
-    setTimeout(function(){
-        boy.classList.add("kneel");
-        document.getElementById("ring").style.opacity="1";
-    },3000);
-
-    // Show message
     setTimeout(function(){
         document.getElementById("message").style.display="block";
-        typeMessage("From the moment we started talking, my days became brighter and my nights became magical. You make my heart smile in ways I never knew were possible. I promise to cherish you, support you, and make you laugh every single day. Thank you for being you. 💕 Happy Valentine’s Day, my love ❤️");
         createHearts();
     },5000);
 }
@@ -156,18 +109,6 @@ function moveBtn(){
     const btn=document.getElementById("noBtn");
     btn.style.left=Math.random()*window.innerWidth+"px";
     btn.style.top=Math.random()*window.innerHeight+"px";
-}
-
-function typeMessage(text){
-    let i=0;
-    const msg=document.getElementById("message");
-    const interval=setInterval(function(){
-        msg.innerHTML+=text.charAt(i);
-        i++;
-        if(i>=text.length){
-            clearInterval(interval);
-        }
-    },40);
 }
 
 function createHearts(){
