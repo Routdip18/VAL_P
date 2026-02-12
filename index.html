@@ -27,39 +27,39 @@ button{
 #yesBtn{ background:#ff2e63; color:white; }
 #noBtn{ background:#333; color:white; position:absolute; }
 
-#scene{ display:none; position:relative; height:450px; }
+#scene{ display:none; height:400px; }
 
-svg{ width:600px; height:400px; }
+svg{ width:600px; height:350px; }
 
-/* WALK ANIMATION */
-#boy{
-    animation:walk 3s forwards;
-}
-
+/* WALK */
 @keyframes walk{
     from{ transform:translateX(-250px); }
     to{ transform:translateX(0); }
 }
 
-/* KNEEL ANIMATION */
-#boy.kneel #body{
+.walk{
+    animation:walk 3s forwards;
+}
+
+/* KNEEL */
+.kneel #body{
     transform:rotate(15deg);
     transform-origin:top center;
     transition:0.6s ease;
 }
 
-#boy.kneel #leg1{
+.kneel #leg1{
     transform:rotate(70deg);
     transform-origin:top left;
     transition:0.6s ease;
 }
 
-#boy.kneel #leg2{
+.kneel #leg2{
     transform:translateY(20px);
     transition:0.6s ease;
 }
 
-#boy.kneel #arm{
+.kneel #arm{
     transform:rotate(-30deg);
     transform-origin:left center;
     transition:0.6s ease;
@@ -71,11 +71,16 @@ svg{ width:600px; height:400px; }
     transition:1s ease;
 }
 
-#boy.kneel + #ring{
-    opacity:1;
+/* Message */
+#message{
+    display:none;
+    font-size:22px;
+    width:70%;
+    margin:auto;
+    margin-top:20px;
 }
 
-/* Floating Hearts */
+/* Hearts */
 .heart{
     position:absolute;
     color:red;
@@ -87,14 +92,6 @@ svg{ width:600px; height:400px; }
     from{ transform:translateY(0); opacity:1; }
     to{ transform:translateY(-600px); opacity:0; }
 }
-
-#message{
-    display:none;
-    font-size:22px;
-    width:70%;
-    margin:auto;
-    margin-top:20px;
-}
 </style>
 </head>
 
@@ -105,7 +102,7 @@ svg{ width:600px; height:400px; }
 <button id="noBtn" onmouseover="moveBtn()">No 😜</button>
 
 <div id="scene">
-<svg viewBox="0 0 600 400">
+<svg viewBox="0 0 600 350">
 
 <!-- Girl -->
 <circle cx="450" cy="170" r="25" fill="#f4c2c2"/>
@@ -113,19 +110,10 @@ svg{ width:600px; height:400px; }
 
 <!-- Boy -->
 <g id="boy">
-    <!-- Head -->
     <circle cx="200" cy="170" r="25" fill="#f4c2c2"/>
-    
-    <!-- Body -->
     <rect id="body" x="185" y="195" width="30" height="80" fill="#4a90e2"/>
-    
-    <!-- Front Leg (kneeling leg) -->
     <rect id="leg1" x="185" y="275" width="12" height="50" fill="#2c3e50"/>
-    
-    <!-- Back Leg -->
     <rect id="leg2" x="203" y="275" width="12" height="50" fill="#2c3e50"/>
-    
-    <!-- Arm (holding ring) -->
     <rect id="arm" x="215" y="210" width="40" height="10" fill="#f4c2c2"/>
 </g>
 
@@ -139,21 +127,27 @@ svg{ width:600px; height:400px; }
 
 <script>
 function start(){
+
     document.getElementById("yesBtn").style.display="none";
     document.getElementById("noBtn").style.display="none";
     document.getElementById("question").style.display="none";
     document.getElementById("scene").style.display="block";
 
-    // After walk, kneel
-    setTimeout(()=>{
-        document.getElementById("boy").classList.add("kneel");
+    let boy=document.getElementById("boy");
+
+    // Walk
+    boy.classList.add("walk");
+
+    // Kneel after walk
+    setTimeout(function(){
+        boy.classList.add("kneel");
         document.getElementById("ring").style.opacity="1";
     },3000);
 
-    // After kneel show message
-    setTimeout(()=>{
-        typeMessage("From the moment we started talking, my days became brighter and my nights became magical. You make my heart smile in ways I never knew were possible. I promise to cherish you, support you, and make you laugh every single day. Thank you for being you. 💕 Happy Valentine’s Day, my love P❤️❤️JA");
+    // Show message
+    setTimeout(function(){
         document.getElementById("message").style.display="block";
+        typeMessage("From the moment we started talking, my days became brighter and my nights became magical. You make my heart smile in ways I never knew were possible. I promise to cherish you, support you, and make you laugh every single day. Thank you for being you. 💕 Happy Valentine’s Day, my love ❤️");
         createHearts();
     },5000);
 }
@@ -167,7 +161,27 @@ function moveBtn(){
 function typeMessage(text){
     let i=0;
     const msg=document.getElementById("message");
-    const interval=setInterval(()=>{
+    const interval=setInterval(function(){
         msg.innerHTML+=text.charAt(i);
         i++;
-        if(i>=
+        if(i>=text.length){
+            clearInterval(interval);
+        }
+    },40);
+}
+
+function createHearts(){
+    setInterval(function(){
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.top="500px";
+        document.body.appendChild(heart);
+        setTimeout(function(){ heart.remove(); },5000);
+    },300);
+}
+</script>
+
+</body>
+</html>
