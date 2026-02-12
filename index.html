@@ -7,8 +7,7 @@ body {
 text-align: center;
 font-family: Arial, sans-serif;
 background: linear-gradient(to right, #ff9a9e, #fad0c4);
-margin-top: 100px;
-overflow: hidden;
+margin-top: 80px;
 }
 
 h1 {
@@ -35,17 +34,25 @@ color: white;
 position: absolute;
 }
 
-#proposal {
+#proposalSection {
 display: none;
-margin-top: 40px;
-font-size: 22px;
-color: white;
+margin-top: 30px;
 animation: fadeIn 2s ease-in-out;
 }
 
-.emoji-scene {
-font-size: 60px;
-margin: 20px 0;
+#proposalSection img {
+width: 300px;
+border-radius: 20px;
+box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+}
+
+#message {
+margin-top: 20px;
+font-size: 20px;
+color: white;
+max-width: 600px;
+margin-left: auto;
+margin-right: auto;
 }
 
 @keyframes fadeIn {
@@ -61,15 +68,15 @@ to { opacity: 1; }
 <button id="yesBtn" onclick="showProposal()">Yes 💖</button>
 <button id="noBtn" onmouseover="moveButton()">No 😜</button>
 
-<div id="proposal">
-<div class="emoji-scene">
-👦💐 ➡️ 👧 💍❤️
+<div id="proposalSection">
+<img src="proposal.jpg" alt="Proposal Image">
+<div id="message">
+From the moment you came into my life, everything feels magical.
+You make my world brighter, my heart happier, and my days more meaningful.
+Today I don’t just ask you to be my Valentine…
+I promise to cherish you, respect you, and love you endlessly.
+Will you hold my hand forever? 💍❤️
 </div>
-From the moment you came into my life, everything feels brighter and more beautiful.
-You make my heart race and my world complete.
-Today, I don’t just ask you to be my Valentine…
-I promise to always care, respect, and love you with all my heart.
-Will you hold my hand forever? 💕
 </div>
 
 <script>
@@ -77,7 +84,7 @@ function showProposal() {
 document.getElementById("yesBtn").style.display = "none";
 document.getElementById("noBtn").style.display = "none";
 document.getElementById("question").style.display = "none";
-document.getElementById("proposal").style.display = "block";
+document.getElementById("proposalSection").style.display = "block";
 }
 
 function moveButton() {
