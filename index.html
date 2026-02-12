@@ -5,61 +5,61 @@
 
 <style>
 body{
-    margin:0;
-    overflow:hidden;
-    font-family:Arial, sans-serif;
-    text-align:center;
-    background:linear-gradient(to top,#ff758c,#ff7eb3);
-    color:white;
+margin:0;
+overflow:hidden;
+font-family:Arial, sans-serif;
+text-align:center;
+background:linear-gradient(to top,#ff758c,#ff7eb3);
+color:white;
 }
 
 h1{
-    margin-top:80px;
+margin-top:80px;
 }
 
 button{
-    padding:12px 30px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    margin:20px;
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin:20px;
 }
 
 #yesBtn{ background:#ff2e63; color:white; }
 #noBtn{ background:#222; color:white; position:absolute; }
 
 #animationContainer{
-    display:none;
-    width:500px;
-    margin:0 auto;
-    margin-top:30px;
+display:none;
+width:450px;
+margin:0 auto;
+margin-top:30px;
 }
 
 #message{
-    display:none;
-    font-size:22px;
-    width:70%;
-    margin:auto;
-    margin-top:20px;
-    animation:fadeIn 2s forwards;
+display:none;
+font-size:22px;
+width:70%;
+margin:auto;
+margin-top:20px;
+animation:fadeIn 2s forwards;
 }
 
 @keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
+from{opacity:0;}
+to{opacity:1;}
 }
 
 .heart{
-    position:absolute;
-    color:red;
-    font-size:20px;
-    animation:float 5s linear infinite;
+position:absolute;
+color:red;
+font-size:20px;
+animation:float 5s linear infinite;
 }
 
 @keyframes float{
-    from{ transform:translateY(0); opacity:1; }
-    to{ transform:translateY(-600px); opacity:0; }
+from{ transform:translateY(0); opacity:1; }
+to{ transform:translateY(-600px); opacity:0; }
 }
 </style>
 
@@ -77,50 +77,59 @@ button{
 <div id="animationContainer"></div>
 
 <div id="message">
-From the moment we started talking, my days became brighter and my nights became magical. 
-You make my heart smile in ways I never knew were possible. 
-I promise to cherish you, support you, and make you laugh every single day. 
+From the moment we started talking, my days became brighter and my nights became magical.
+You make my heart smile in ways I never knew were possible.
+I promise to cherish you, support you, and make you laugh every single day.
 Thank you for being you. 💕 Happy Valentine’s Day, my love ❤️
 </div>
 
+<!-- Background Music -->
+<audio id="bgMusic" src="music.mp3"></audio>
+
 <script>
 function start(){
-    document.getElementById("yesBtn").style.display="none";
-    document.getElementById("noBtn").style.display="none";
-    document.getElementById("question").style.display="none";
-    document.getElementById("animationContainer").style.display="block";
 
-    // Load Romantic Proposal Animation
-    lottie.loadAnimation({
-        container: document.getElementById('animationContainer'),
-        renderer: 'svg',
-        loop: false,
-        autoplay: true,
-        path: 'https://assets9.lottiefiles.com/packages/lf20_jcikwtux.json'
-    });
+// Play music
+let music = document.getElementById("bgMusic");
+music.volume = 0.4;
+music.play();
 
-    setTimeout(function(){
-        document.getElementById("message").style.display="block";
-        createHearts();
-    },5000);
+document.getElementById("yesBtn").style.display="none";
+document.getElementById("noBtn").style.display="none";
+document.getElementById("question").style.display="none";
+document.getElementById("animationContainer").style.display="block";
+
+// Boy giving flowers animation
+lottie.loadAnimation({
+container: document.getElementById('animationContainer'),
+renderer: 'svg',
+loop: false,
+autoplay: true,
+path: 'https://assets2.lottiefiles.com/packages/lf20_wkebwzpz.json'
+});
+
+setTimeout(function(){
+document.getElementById("message").style.display="block";
+createHearts();
+},5000);
 }
 
 function moveBtn(){
-    const btn=document.getElementById("noBtn");
-    btn.style.left=Math.random()*window.innerWidth+"px";
-    btn.style.top=Math.random()*window.innerHeight+"px";
+const btn=document.getElementById("noBtn");
+btn.style.left=Math.random()*window.innerWidth+"px";
+btn.style.top=Math.random()*window.innerHeight+"px";
 }
 
 function createHearts(){
-    setInterval(function(){
-        const heart=document.createElement("div");
-        heart.className="heart";
-        heart.innerHTML="❤";
-        heart.style.left=Math.random()*window.innerWidth+"px";
-        heart.style.top="500px";
-        document.body.appendChild(heart);
-        setTimeout(function(){ heart.remove(); },5000);
-    },300);
+setInterval(function(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+heart.style.left=Math.random()*window.innerWidth+"px";
+heart.style.top="500px";
+document.body.appendChild(heart);
+setTimeout(function(){ heart.remove(); },5000);
+},300);
 }
 </script>
 
